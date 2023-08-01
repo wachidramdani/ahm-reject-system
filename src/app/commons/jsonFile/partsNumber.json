@@ -1,0 +1,123 @@
+[
+    {
+        "id": 1,
+        "part_number": "082300000MPX",
+        "part_number_desc": "MPX SJWA",
+        "part_number_parent": "",
+        "mrp_controller": "MXX 22",
+        "vendor_desc": "Vendor B",
+        "vendor_code": "VB",
+        "isActive": false,
+        "isParent": true
+    },
+    {
+        "id": 1,
+        "part_number": "082300000MPX",
+        "part_number_desc": "MPX SJWA",
+        "part_number_parent": "",
+        "mrp_controller": "MRP 04",
+        "vendor_desc": "Vendor A",
+        "vendor_code": "VA",
+        "isActive": true,
+        "isParent": true
+    },
+    {
+        "id": 2,
+        "part_number": "0823M02K8MPX",
+        "part_number_desc": "MPX 10W30 SJWA 0.1L FED",
+        "part_number_parent": "082300000MPX",
+        "mrp_controller": "MRP 04",
+        "vendor_desc": "Vendor A",
+        "vendor_code": "VA",
+        "isActive": true,
+        "isParent": false
+    },
+    {
+        "id": 3,
+        "part_number": "082300000SPX",
+        "part_number_desc": "SPX SJWA",
+        "part_number_parent": "",
+        "mrp_controller": "MRP 01",
+        "vendor_desc": "Vendor B",
+        "vendor_code": "VB",
+        "isActive": true,
+        "isParent": true
+    },
+    {
+        "id": 4,
+        "part_number": "0823M04K8SPX",
+        "part_number_desc": "SPX 10W30 SJWA 0.1L FED",
+        "part_number_parent": "082300000SPX",
+        "mrp_controller": "MRP 01",
+        "vendor_desc": "Vendor B",
+        "vendor_code": "VB",
+        "isActive": true,
+        "isParent": false
+    },
+    {
+        "id": 5,
+        "part_number": "0833M04K8SPX",
+        "part_number_desc": "SPX 15W30 SJWA 0.5L FED",
+        "part_number_parent": "082300000SPX",
+        "mrp_controller": "MRP 02",
+        "vendor_desc": "Vendor B",
+        "vendor_code": "VB",
+        "isActive": true,
+        "isParent": false
+    },
+    {
+        "id": 6,
+        "part_number": "0853M04K8SPX",
+        "part_number_desc": "SPX 20W30 SJWA 2L FED",
+        "part_number_parent": "082300000SPX",
+        "mrp_controller": "MRP 02",
+        "vendor_desc": "Vendor B",
+        "vendor_code": "VB",
+        "isActive": true,
+        "isParent": false
+    },
+    {
+        "id": 7,
+        "part_number": "0855M04K8SPX",
+        "part_number_desc": "SPX 25W30 SJWA 2.5L FED",
+        "part_number_parent": "082300000SPX",
+        "mrp_controller": "MRP 02",
+        "vendor_desc": "Vendor B",
+        "vendor_code": "VB",
+        "isActive": true,
+        "isParent": false
+    },
+    {
+        "id": 8,
+        "part_number": "188100000KLM",
+        "part_number_desc": "KLM SOHC",
+        "part_number_parent": "",
+        "mrp_controller": "MRP 11",
+        "vendor_desc": "Vendor C",
+        "vendor_code": "VC",
+        "isActive": true,
+        "isParent": true
+    },
+    {
+        "id": 9,
+        "part_number": "1881HC751KLM",
+        "part_number_desc": "KLM 75GS SOHC LED",
+        "part_number_parent": "188100000KLM",
+        "mrp_controller": "MRP 11",
+        "vendor_desc": "Vendor C",
+        "vendor_code": "VC",
+        "isActive": true,
+        "isParent": false
+    },
+    {
+        "id": 10,
+        "part_number": "1881HC901KLM",
+        "part_number_desc": "KLM 90GS SOHC LED",
+        "part_number_parent": "188100000KLM",
+        "mrp_controller": "MRP 11",
+        "vendor_desc": "Vendor C",
+        "vendor_code": "VC",
+        "isActive": true,
+        "isParent": false
+    }
+]

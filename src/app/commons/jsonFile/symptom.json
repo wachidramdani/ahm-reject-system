@@ -1,0 +1,50 @@
+[
+    {
+        "id": "000001",
+        "catSymptomp": "Logam",
+        "nameSymptomp": "Retak",
+        "vdf": "01/02/2022",
+        "vdt": "31/12/2022",
+        "status": "Active"
+    },
+    {
+        "id": "000002",
+        "catSymptomp": "Logam",
+        "nameSymptomp": "Patah",
+        "vdf": "01/02/2022",
+        "vdt": "31/12/2022",
+        "status": "Active"
+    },
+    {
+        "id": "000003",
+        "catSymptomp": "Plastik",
+        "nameSymptomp": "Pecah",
+        "vdf": "01/02/2022",
+        "vdt": "31/12/2022",
+        "status": "Active"
+    },
+    {
+        "id": "000004",
+        "catSymptomp": "Plastik",
+        "nameSymptomp": "Patah",
+        "vdf": "01/02/2022",
+        "vdt": "31/12/2022",
+        "status": "Active"
+    },
+    {
+        "id": "000005",
+        "catSymptomp": "Cairan",
+        "nameSymptomp": "Tercemar",
+        "vdf": "01/02/2022",
+        "vdt": "31/12/2022",
+        "status": "Active"
+    },
+    {
+        "id": "000006",
+        "catSymptomp": "Electrical",
+        "nameSymptomp": "Konslet",
+        "vdf": "01/02/2022",
+        "vdt": "31/12/2022",
+        "status": "Active"
+    }
+]

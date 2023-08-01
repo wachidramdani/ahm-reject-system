@@ -1,0 +1,13 @@
+[
+    {"user":"cholis", "password":"8888", "job":"Operator", "dept":"Manage Incoming Good", "name":"Cholis Firmansyah", "level":"operator", "employeeID": "1902992489001"},
+    {"user":"aji", "password":"8888", "job":"Operator", "dept":"Manage Putaway", "name":"Aji Siregar", "level":"operator", "employeeID": "1902001295000"},
+    {"user":"anam", "password":"8888", "job":"Operator", "dept":"Local Process", "name":"Khoirul Anam", "level":"operator", "employeeID": "1908200102021"},
+    {"user":"syifa", "password":"8888", "job":"Operator", "dept":"Manage Replenishment", "name":"Syifa", "level":"operator", "employeeID": "1900294012021"},
+    {"user":"nur", "password":"8888", "job":"Operator", "dept":"Manage Picking", "name":"M. Nur Ragil", "level":"operator", "employeeID": "1902992489001"},
+    {"user":"dedi", "password":"8888", "job":"Operator", "dept":"Check & Pack", "name":"Dedi", "level":"operator", "employeeID": "1902912423001"},
+    {"user":"bagus", "password":"8888", "job":"Supervisor", "dept":"Warehouse", "name":"Bagus", "level":"admin", "employeeID": "1902998888001"},
+    {"user":"dani", "password":"8888", "job":"Supervisor", "dept":"Warehouse", "name":"Dani", "level":"admin", "employeeID": "1902992489001"},
+    {"user":"ahmad", "password":"8888", "job":"Operator", "dept":"Vendor", "name":"Ahmad", "level":"supplier", "employeeID": "1957668689001"},
+    {"user":"faisal", "password":"8888", "job":"Operator", "dept":"Vendor", "name":"Faisal", "level":"supplier", "employeeID": "1902900980001"},
+    {"user":"rohman", "password":"8888", "job":"Operator", "dept":"Vendor", "name":"Rohman", "level":"supplier", "employeeID": "1902989089001"}
+]
