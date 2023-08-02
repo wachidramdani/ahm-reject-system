@@ -86,6 +86,7 @@ function PrintSuratJalan() {
   };
 
   const handleChangeSelect = (e, name) => {
+    const tempData = JSON.parse(localStorage.getItem('dataRc')).filter((el) => el.status === 'SUPPLIER' && el.plat_number_reject_give === "")
     if (name === "transaksi") {
       setTransaksi(e);
       if (e && e.label) {
@@ -95,9 +96,9 @@ function PrintSuratJalan() {
           transaksi: e ? e.label : "",
         });
         if (e.value === 'A') {
-          setDatas(datas.filter((el) => el.action !== "Scrap"))
+          setDatas(tempData.filter((el) => el.action !== "Scrap"))
         } else if (e.value === 'B') {
-          setDatas(datas.filter((el) => el.quality_quantity === "Quantity"))
+          setDatas(tempData.filter((el) => el.quality_quantity === "Quantity"))
         }
       } else {
         setDisabledRc(true)

@@ -56,13 +56,13 @@ function ReceivePartReplacement() {
       },
     },
     {
-      dataField: "no_rc",
-      text: "No RC",
+      dataField: "no_surat_jalan",
+      text: "No Surat Jalan",
       headerAlign: "center",
       align: "center",
       editable: false,
       headerStyle: (colum, colIndex) => {
-        return { width: "120px" };
+        return { width: "150px" };
       },
     },
   ]
@@ -309,7 +309,7 @@ function ReceivePartReplacement() {
       </div>
       <Modal show={show} onHide={() => setShow(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>List RC</Modal.Title>
+          <Modal.Title>List Surat Jalan</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Table2EditSearch
