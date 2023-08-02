@@ -71,7 +71,6 @@ function GivePartReject() {
     e.stopPropagation();
     const dataUser = JSON.parse(localStorage.getItem("dataUser"));
 
-    console.log(row, 'row')
     setRc({
       ...rc,
       nomor_surat_jalan: row.no_surat_jalan,
@@ -94,10 +93,6 @@ function GivePartReject() {
   //     operatorId: dataUser?.id,
   //   });
   // }, []);
-
-  useEffect(() => {
-    console.log(rc, "rc");
-  }, [rc]);
 
   const handleChange = (e, name) => {
     setRc({

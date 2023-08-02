@@ -110,7 +110,6 @@ function PrintRejectCard() {
   };
 
   const handleChangeSelect = (e, name) => {
-    console.log(e, 'ee')
     if (name === "process") {
       setProcess(e);
       if (e && e.label && e.label !== "") {
@@ -295,7 +294,7 @@ function PrintRejectCard() {
                 </div>
                 <div class="form-group row">
                   <label for="inputPassword" class="col-sm-3 col-form-label">
-                    Print / Reprint
+                    Print/Reprint
                   </label>
                   <div class="col-sm-9">
                     <Select
