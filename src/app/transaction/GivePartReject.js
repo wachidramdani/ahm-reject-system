@@ -102,7 +102,7 @@ function GivePartReject() {
   const handleChange = (e, name) => {
     setRc({
       ...rc,
-      [name]: e.target.value,
+      [name]: name === "nomor_surat_jalan" ? e.target.value.replace(/[^0-9\\.]+/g, '') : e.target.value,
     });
   };
 
@@ -126,6 +126,16 @@ function GivePartReject() {
     }
   }
 
+  const handleSearch = (e) => {
+    e.stopPropagation();
+    setShow(true)
+    if(rc.nomor_surat_jalan && rc.nomor_surat_jalan !== ""){
+      setDatas(datas.filter((el) => el.no_surat_jalan === rc.nomor_surat_jalan))
+    } else {
+      setDatas(JSON.parse(localStorage.getItem('dataRc')).filter((el) => el.status === 'SUPPLIER' && el.no_surat_jalan !== ""))
+    }
+  }
+
   return (
     <div>
       <div className="container d-flex p-md-0">
@@ -142,19 +152,36 @@ function GivePartReject() {
               <p className="mg-b-20 font-italic">
                 Please check quantity before confirm
               </p>
-              <form>
+              {/* <form> */}
                 <div class="form-group row">
                   <label for="inputPassword" class="col-sm-4 col-form-label">
                     Nomor SJ
                   </label>
-                  <div class="col-sm-8">
+                  <div class="col-sm-5" >
                     <Form.Control
                       type="text"
                       name="nomor_surat_jalan"
                       value={rc.nomor_surat_jalan}
-                      onClick={() => setShow(true)}
                       placeholder="Scan/Input Nomor SJ"
+                      style={{minHeight: 48}}
+                      onChange={(e) => handleChange(e, "nomor_surat_jalan")}
                     />
+                  </div>
+                  <div class="col-sm-1">
+                    <button>
+                      <i
+                        className="typcn typcn-camera"
+                        style={{ fontSize: "28px" }}
+                      ></i>{" "}
+                    </button>
+                  </div>
+                  <div class="col-sm-1">
+                    <button onClick={handleSearch}>
+                      <i
+                        className="typcn typcn-zoom-outline"
+                        style={{ fontSize: "28px" }}
+                      ></i>{" "}
+                    </button>
                   </div>
                 </div>
                 <div class="form-group row">
@@ -277,7 +304,7 @@ function GivePartReject() {
                     />
                   </div>
                 </div>
-              </form>
+              {/* </form> */}
             </div>
           </div>
           <div>

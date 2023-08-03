@@ -432,6 +432,16 @@ function MonitoringRs() {
                     align: 'center',
                 },
             },
+            {
+                accessorKey: 'actions',
+                header: 'Action',
+                muiTableHeadCellProps: {
+                    align: 'center',
+                },
+                muiTableBodyCellProps: {
+                    align: 'center',
+                },
+            },
         ]
 
     const [data, setData] = useState([
@@ -744,7 +754,7 @@ function MonitoringRs() {
                                     <a className="nav-link" href="/transaction/createrc">
                                         <Button variant="primary btn-block" className="btn-primary btn-brand btn-sm icon mg-r-2" style={{ lineHeight: '28px', display: 'flex' }}><i className="typcn typcn-plus" style={{ fontSize: '18px', lineHeight: '28px' }}></i> Create RC</Button>
                                     </a>
-                                    <a className="nav-link" href="//transaction/printrc">
+                                    <a className="nav-link" href="/transaction/printrc">
                                         <Button variant="secondary btn-block" className="btn-secondary btn-brand btn-sm icon mg-r-2" style={{ lineHeight: '28px', display: 'flex' }}><i className="typcn typcn-printer" style={{ fontSize: '18px', lineHeight: '28px' }}></i> Print RC</Button>
                                     </a>
                                     <a className="nav-link" href="/transaction/printsj">

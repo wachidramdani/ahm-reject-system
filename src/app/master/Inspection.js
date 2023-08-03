@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import Select from 'react-select';
 import Table2Edit from '../commons/Table/Table2Edit';
 import { ExpandMore } from '@material-ui/icons';
@@ -15,7 +15,7 @@ import { Accordion, AccordionDetails, AccordionSummary, Box, Typography } from '
 
 function Inspection() {
     const [panel, setPanel] = useState(true)
-    const [partNumber, setPartNumber] = useState(null)
+    const [partNumber, setPartNumber] = useState("")
     const [vdf, setVdf] = useState("")
     const [vdt, setVdt] = useState("")
     const [valStatus, setValStatus] = useState(null)
@@ -135,7 +135,7 @@ function Inspection() {
 
     const handleChange = (e, name) => {
         if (e) {
-            if (name === 'pn') { setPartNumber(e) }
+            if (name === 'pn') { setPartNumber(e.target.value.replace(/[^0-9\\.]+/g, '')) }
             else if (name === 'status') { setValStatus(e) }
         }
     }
@@ -196,7 +196,35 @@ function Inspection() {
                                         <div className="row mg-b-4">
                                             <div className="col-lg-5">
                                                 <span className="font-weight-bold font-italic">Part Number</span>
-                                                <Select name="pn" value={partNumber} options={optPartNumber} onChange={(e) => handleChange(e, 'pn')} isClearable />
+                                                <div className="row mg-b-4">
+                                                    <div class="col-sm-8">
+                                                        <Form.Control
+                                                            type="text"
+                                                            name="pn"
+                                                            value={partNumber}
+                                                            onChange={(e) => handleChange(e, 'pn')}
+                                                            style={{minHeight: 48}}
+                                                        />
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <button>
+                                                            <i
+                                                                className="typcn typcn-camera"
+                                                                style={{ fontSize: "28px" }}
+                                                            ></i>{" "}
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-sm-1" style={{marginLeft: -20}}>
+                                                        <button>
+                                                            <i
+                                                                className="typcn typcn-zoom-outline"
+                                                                style={{ fontSize: "28px" }}
+                                                            ></i>{" "}
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                                {/* <Select name="pn" value={partNumber} options={optPartNumber} onChange={(e) => handleChange(e, 'pn')} isClearable /> */}
                                             </div>
 
                                             <div className="col-lg-5">
@@ -232,7 +260,7 @@ function Inspection() {
                                     <Button variant="success btn-block" className="btn-info btn-brand btn-sm icon mg-r-2" style={{ lineHeight: '28px', display: 'flex' }}><i className="typcn typcn-zoom-outline" style={{ fontSize: '18px', lineHeight: '28px' }}></i> Search</Button>
                                 </a>
                                 <a className="nav-link" href="#/">
-                                    <Button variant="danger btn-block" className="btn-danger btn-brand btn-sm icon mg-r-2" style={{ lineHeight: '28px', display: 'flex' }}  onClick={handleReset}><i className="typcn typcn-arrow-sync" style={{ fontSize: '18px', lineHeight: '28px' }}></i> Reset</Button>
+                                    <Button variant="danger btn-block" className="btn-danger btn-brand btn-sm icon mg-r-2" style={{ lineHeight: '28px', display: 'flex' }} onClick={handleReset}><i className="typcn typcn-arrow-sync" style={{ fontSize: '18px', lineHeight: '28px' }}></i> Reset</Button>
                                 </a>
                                 <a className="nav-link" href="#/">
                                     <Button variant="primary btn-block" className="btn-primary btn-brand btn-sm icon mg-r-2" style={{ lineHeight: '28px', display: 'flex' }} onClick={handleAdd}><i className="typcn typcn-plus" style={{ fontSize: '18px', lineHeight: '28px' }}></i> Add Standard Picture</Button>

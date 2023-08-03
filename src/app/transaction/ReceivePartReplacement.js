@@ -102,7 +102,7 @@ function ReceivePartReplacement() {
   const handleChange = (e, name) => {
     setRc({
       ...rc,
-      [name]: e.target.value,
+      [name]: name === "nomor_surat_jalan" ? e.target.value.replace(/[^0-9\\.]+/g, '') : e.target.value,
     });
   };
 
@@ -114,7 +114,7 @@ function ReceivePartReplacement() {
   const handleProcess = () => {
     if (rc && rc.no_rc !== "") {
       const tempDatas = JSON.parse(localStorage.getItem('dataRc'))
-      const newData = tempDatas.map((el) => el["no_rc"] === rc.no_rc ? { ...el, status: "COMPLETE", operatorId: rc.operatorId } : el);      localStorage.setItem("dataRc", JSON.stringify(newData))
+      const newData = tempDatas.map((el) => el["no_rc"] === rc.no_rc ? { ...el, status: "COMPLETE", operatorId: rc.operatorId } : el); localStorage.setItem("dataRc", JSON.stringify(newData))
       window.location.assign('/monitoring-rs')
     } else {
       Swal.fire({
@@ -122,6 +122,16 @@ function ReceivePartReplacement() {
         icon: 'warning',
         text: 'silahkan pilih No Rc yang akan di proses',
       });
+    }
+  }
+
+  const handleSearch = (e) => {
+    e.stopPropagation();
+    setShow(true)
+    if(rc.nomor_surat_jalan && rc.nomor_surat_jalan !== ""){
+      setDatas(datas.filter((el) => el.no_surat_jalan === rc.nomor_surat_jalan))
+    } else {
+      setDatas(JSON.parse(localStorage.getItem('dataRc')).filter((el) => el.status === 'GIVE PART' && el.no_surat_jalan !== ""))
     }
   }
 
@@ -141,142 +151,157 @@ function ReceivePartReplacement() {
               <p className="mg-b-20 font-italic">
                 Please check quantity before confirm
               </p>
-              <form>
-                <div class="form-group row">
-                  <label for="inputPassword" class="col-sm-4 col-form-label">
-                    Nomor SJ
-                  </label>
-                  <div class="col-sm-8">
-                    <Form.Control
-                      type="text"
-                      name="nomor_surat_jalan"
-                      value={rc.nomor_surat_jalan}
-                      onClick={() => setShow(true)}
-                      placeholder="Scan/Input Nomor SJ"
-                    />
-                  </div>
+              <div class="form-group row">
+                <label for="inputPassword" class="col-sm-4 col-form-label">
+                  Nomor SJ
+                </label>
+                <div class="col-sm-5" >
+                  <Form.Control
+                    type="text"
+                    name="nomor_surat_jalan"
+                    value={rc.nomor_surat_jalan}
+                    placeholder="Scan/Input Nomor SJ"
+                    style={{ minHeight: 48 }}
+                    onChange={(e) => handleChange(e, "nomor_surat_jalan")}
+                  />
                 </div>
-                <div class="form-group row">
-                  <label for="inputPassword" class="col-sm-4 col-form-label">
-                    RC No.
-                  </label>
-                  <div class="col-sm-8">
-                    <Form.Control
-                      type="text"
-                      name="no_rc"
-                      value={rc.no_rc}
-                      onChange={(e) => handleChange(e, "no_rc")}
-                      placeholder="Auto Input RC No."
-                      disabled
-                    />
-                  </div>
+                <div class="col-sm-1">
+                  <button>
+                    <i
+                      className="typcn typcn-camera"
+                      style={{ fontSize: "28px" }}
+                    ></i>{" "}
+                  </button>
                 </div>
-                <div class="form-group row">
-                  <label for="inputPassword" class="col-sm-4 col-form-label">
-                    Operator ID
-                  </label>
-                  <div class="col-sm-8">
-                    <Form.Control
-                      type="text"
-                      name="operatorId"
-                      value={rc.operatorId}
-                      onChange={(e) => handleChange(e, "operatorId")}
-                      placeholder="Auto Input Operator ID"
-                      disabled
-                    />
-                  </div>
+                <div class="col-sm-1">
+                  <button onClick={handleSearch}>
+                    <i
+                      className="typcn typcn-zoom-outline"
+                      style={{ fontSize: "28px" }}
+                    ></i>{" "}
+                  </button>
                 </div>
-                <div class="form-group row">
-                  <label for="inputPassword" class="col-sm-4 col-form-label">
-                    MRP Controller
-                  </label>
-                  <div class="col-sm-8">
-                    <Form.Control
-                      type="text"
-                      name="mrp_controller"
-                      value={rc.mrp_controller}
-                      onChange={(e) => handleChange(e, "mrp_controller")}
-                      placeholder="Auto Input MRP Controller"
-                      disabled
-                    />
-                  </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputPassword" class="col-sm-4 col-form-label">
+                  RC No.
+                </label>
+                <div class="col-sm-8">
+                  <Form.Control
+                    type="text"
+                    name="no_rc"
+                    value={rc.no_rc}
+                    onChange={(e) => handleChange(e, "no_rc")}
+                    placeholder="Auto Input RC No."
+                    disabled
+                  />
                 </div>
-                <div class="form-group row">
-                  <label for="inputPassword" class="col-sm-4 col-form-label">
-                    Supplier Code
-                  </label>
-                  <div class="col-sm-8">
-                    <Form.Control
-                      type="text"
-                      name="supplier_code"
-                      value={rc.supplier_code}
-                      onChange={(e) => handleChange(e, "supplier_code")}
-                      placeholder="Auto Input Supplier Code"
-                      disabled
-                    />
-                  </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputPassword" class="col-sm-4 col-form-label">
+                  Operator ID
+                </label>
+                <div class="col-sm-8">
+                  <Form.Control
+                    type="text"
+                    name="operatorId"
+                    value={rc.operatorId}
+                    onChange={(e) => handleChange(e, "operatorId")}
+                    placeholder="Auto Input Operator ID"
+                    disabled
+                  />
                 </div>
-                <div class="form-group row">
-                  <label for="inputPassword" class="col-sm-4 col-form-label">
-                    Supplier Desc
-                  </label>
-                  <div class="col-sm-8">
-                    <Form.Control
-                      type="text"
-                      name="supplier_desc"
-                      value={rc.supplier_desc}
-                      onChange={(e) => handleChange(e, "supplier_desc")}
-                      placeholder="Auto Input Supplier Desc"
-                      disabled
-                    />
-                  </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputPassword" class="col-sm-4 col-form-label">
+                  MRP Controller
+                </label>
+                <div class="col-sm-8">
+                  <Form.Control
+                    type="text"
+                    name="mrp_controller"
+                    value={rc.mrp_controller}
+                    onChange={(e) => handleChange(e, "mrp_controller")}
+                    placeholder="Auto Input MRP Controller"
+                    disabled
+                  />
                 </div>
-                <div class="form-group row">
-                  <label for="inputPassword" class="col-sm-4 col-form-label">
-                    Part Number
-                  </label>
-                  <div class="col-sm-8">
-                    <Form.Control
-                      type="text"
-                      name="partNumber"
-                      value={rc.partNumber}
-                      onChange={(e) => handleChange(e, "partNumber")}
-                      placeholder="Auto Input Part Number"
-                      disabled
-                    />
-                  </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputPassword" class="col-sm-4 col-form-label">
+                  Supplier Code
+                </label>
+                <div class="col-sm-8">
+                  <Form.Control
+                    type="text"
+                    name="supplier_code"
+                    value={rc.supplier_code}
+                    onChange={(e) => handleChange(e, "supplier_code")}
+                    placeholder="Auto Input Supplier Code"
+                    disabled
+                  />
                 </div>
-                <div class="form-group row">
-                  <label for="inputPassword" class="col-sm-4 col-form-label">
-                    Part Desc.
-                  </label>
-                  <div class="col-sm-8">
-                    <Form.Control
-                      type="text"
-                      name="partNumberDesc"
-                      value={rc.partNumberDesc}
-                      onChange={(e) => handleChange(e, "partNumberDesc")}
-                      placeholder="Auto Input Part Desc"
-                      disabled
-                    />
-                  </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputPassword" class="col-sm-4 col-form-label">
+                  Supplier Desc
+                </label>
+                <div class="col-sm-8">
+                  <Form.Control
+                    type="text"
+                    name="supplier_desc"
+                    value={rc.supplier_desc}
+                    onChange={(e) => handleChange(e, "supplier_desc")}
+                    placeholder="Auto Input Supplier Desc"
+                    disabled
+                  />
                 </div>
-                <div class="form-group row">
-                  <label for="inputPassword" class="col-sm-4 col-form-label">
-                    Jumlah
-                  </label>
-                  <div class="col-sm-8">
-                    <Form.Control
-                      type="text"
-                      name="jumlah"
-                      value={rc.jumlah}
-                      onChange={(e) => handleChange(e, "jumlah")}
-                      placeholder="Auto Input Jumlah"
-                      disabled
-                    />
-                  </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputPassword" class="col-sm-4 col-form-label">
+                  Part Number
+                </label>
+                <div class="col-sm-8">
+                  <Form.Control
+                    type="text"
+                    name="partNumber"
+                    value={rc.partNumber}
+                    onChange={(e) => handleChange(e, "partNumber")}
+                    placeholder="Auto Input Part Number"
+                    disabled
+                  />
                 </div>
-              </form>
+              </div>
+              <div class="form-group row">
+                <label for="inputPassword" class="col-sm-4 col-form-label">
+                  Part Desc.
+                </label>
+                <div class="col-sm-8">
+                  <Form.Control
+                    type="text"
+                    name="partNumberDesc"
+                    value={rc.partNumberDesc}
+                    onChange={(e) => handleChange(e, "partNumberDesc")}
+                    placeholder="Auto Input Part Desc"
+                    disabled
+                  />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputPassword" class="col-sm-4 col-form-label">
+                  Jumlah
+                </label>
+                <div class="col-sm-8">
+                  <Form.Control
+                    type="text"
+                    name="jumlah"
+                    value={rc.jumlah}
+                    onChange={(e) => handleChange(e, "jumlah")}
+                    placeholder="Auto Input Jumlah"
+                    disabled
+                  />
+                </div>
+              </div>
             </div>
           </div>
           <div>
