@@ -113,8 +113,8 @@ function ReceivePartReplacement() {
 
   const handleProcess = () => {
     if (rc && rc.no_rc !== "") {
-      const newData = datas.map((el) => el["no_rc"] === rc.no_rc ? { ...el, status: "COMPLETE", operatorId: rc.operatorId } : el);
-      localStorage.setItem("dataRc", JSON.stringify(newData))
+      const tempDatas = JSON.parse(localStorage.getItem('dataRc'))
+      const newData = tempDatas.map((el) => el["no_rc"] === rc.no_rc ? { ...el, status: "COMPLETE", operatorId: rc.operatorId } : el);      localStorage.setItem("dataRc", JSON.stringify(newData))
       window.location.assign('/monitoring-rs')
     } else {
       Swal.fire({

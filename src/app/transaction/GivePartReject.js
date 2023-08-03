@@ -71,6 +71,7 @@ function GivePartReject() {
     e.stopPropagation();
     const dataUser = JSON.parse(localStorage.getItem("dataUser"));
 
+    console.log(row, 'row')
     setRc({
       ...rc,
       nomor_surat_jalan: row.no_surat_jalan,
@@ -94,6 +95,10 @@ function GivePartReject() {
   //   });
   // }, []);
 
+  useEffect(() => {
+    console.log(rc, "rc");
+  }, [rc]);
+
   const handleChange = (e, name) => {
     setRc({
       ...rc,
@@ -108,7 +113,8 @@ function GivePartReject() {
 
   const handleProcess = () => {
     if (rc && rc.no_rc !== "") {
-      const newData = datas.map((el) => el["no_rc"] === rc.no_rc ? { ...el, status: "GIVE PART", operatorId: rc.operatorId } : el);
+      const tempDatas = JSON.parse(localStorage.getItem('dataRc'))
+      const newData = tempDatas.map((el) => el["no_rc"] === rc.no_rc ? { ...el, status: "GIVE PART", operatorId: rc.operatorId } : el);
       localStorage.setItem("dataRc", JSON.stringify(newData))
       window.location.assign('/monitoring-rs')
     } else {

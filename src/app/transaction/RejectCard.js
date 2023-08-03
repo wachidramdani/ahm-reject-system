@@ -356,33 +356,43 @@ function RejectCard() {
   const handleValidation = (dataRc) => {
     let err = false;
     if(dataRc.process === ""){
+      console.log('1')
       err = true;
     }
     if(!slocAsal){
+      console.log('2')
       err = true;
     }
-    if(rc.part_number_induk){
+    if(rc.part_number_induk.length === 0){
+      console.log('3')
       err = true;
     }
-    if(rc.part_number_anak){
+    if(rc.part_number_anak.length === 0){
+      console.log('4')
       err = true;
     }
     if(!rejectSymptom){
+      console.log('5')
       err = true;
     }
     if(!beban){
+      console.log('6')
       err = true;
     }
     if(!quantityQuality){
+      console.log('7')
       err = true;
     }
     if(rc.jumlah === "" || +rc.jumlah < 1){
+      console.log('8')
       err = true;
     }
     if(!action){
+      console.log('9')
       err = true;
     }
     if(rc.symptoms.length < 1){
+      console.log('10')
       err = true;
     }
 
@@ -393,6 +403,7 @@ function RejectCard() {
     e.stopPropagation();
     let dataRc = rc;
     dataRc.symptoms = datas;
+    console.log(dataRc, 'data rc');
     const cekVal = handleValidation(dataRc);
     if(!cekVal){
       const newId = Math.max(...localRc.map(o => +o.id))+1;

@@ -137,7 +137,7 @@ function PrintSuratJalan() {
         estimated_date_give_part: rc.est_date_arrival,
         estimated_time_give_part: rc.est_time_arrival,
         plat_number_reject_give: rc.platNumber,
-        no_surat_jalan: new Date()
+        no_surat_jalan: Date.now()
       } : el);
       localStorage.setItem("dataRc", JSON.stringify(newData))
       window.location.assign('/monitoring-rs')
