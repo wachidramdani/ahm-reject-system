@@ -2,13 +2,17 @@ import React, { useState, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
 import Table2EditSearch from "../commons/Table/Table2EditSearch";
 import Modal from "react-bootstrap/Modal";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 
 function GivePartReject() {
   const [currentPage, setCurrentPage] = useState(1);
   const [sizePerPage, setSizePerPage] = useState(5);
   const [show, setShow] = useState(false);
-  const [datas, setDatas] = useState(JSON.parse(localStorage.getItem('dataRc')).filter((el) => el.status === 'SUPPLIER' && el.no_surat_jalan !== ""));
+  const [datas, setDatas] = useState(
+    JSON.parse(localStorage.getItem("dataRc")).filter(
+      (el) => el.status === "SUPPLIER" && el.no_surat_jalan !== ""
+    )
+  );
   const [rc, setRc] = useState({
     nomor_surat_jalan: "",
     no_rc: "",
@@ -18,7 +22,7 @@ function GivePartReject() {
     supplier_desc: "",
     partNumber: "",
     partNumberDesc: "",
-    jumlah: ""
+    jumlah: "",
   });
 
   const columns = [
@@ -36,20 +40,25 @@ function GivePartReject() {
       },
     },
     {
-      dataField: 'id',
-      text: 'Action',
-      headerAlign: 'center',
-      align: 'center',
+      dataField: "id",
+      text: "Action",
+      headerAlign: "center",
+      align: "center",
       editable: false,
       isDummyField: true,
       headerStyle: (colum, colIndex) => {
-        return { width: '60px' };
+        return { width: "60px" };
       },
       formatter: (cellContent, row) => {
         return (
           <div>
             <span className="btnInTable">
-              <Button className="btn-success btn-brand btn-sm icon mg-r-2" onClick={(e) => handleSelectPart(e, row)}><i className="typcn typcn-input-checked"> </i> </Button>
+              <Button
+                className="btn-success btn-brand btn-sm icon mg-r-2"
+                onClick={(e) => handleSelectPart(e, row)}
+              >
+                <i className="typcn typcn-input-checked"> </i>{" "}
+              </Button>
             </span>
           </div>
         );
@@ -65,13 +74,13 @@ function GivePartReject() {
         return { width: "150px" };
       },
     },
-  ]
+  ];
 
   const handleSelectPart = (e, row) => {
     e.stopPropagation();
     const dataUser = JSON.parse(localStorage.getItem("dataUser"));
 
-    console.log(row, 'row')
+    console.log(row, "row");
     setRc({
       ...rc,
       nomor_surat_jalan: row.no_surat_jalan,
@@ -82,10 +91,10 @@ function GivePartReject() {
       supplier_desc: row.supplier_desc,
       partNumber: row.part_number_induk,
       partNumberDesc: row.part_induk_desc,
-      jumlah: row.jumlah
+      jumlah: row.jumlah,
     });
-    setShow(false)
-  }
+    setShow(false);
+  };
 
   // useEffect(() => {
   //   const dataUser = JSON.parse(localStorage.getItem("dataUser"));
@@ -102,7 +111,10 @@ function GivePartReject() {
   const handleChange = (e, name) => {
     setRc({
       ...rc,
-      [name]: name === "nomor_surat_jalan" ? e.target.value.replace(/[^0-9\\.]+/g, '') : e.target.value,
+      [name]:
+        name === "nomor_surat_jalan"
+          ? e.target.value.replace(/[^0-9\\.]+/g, "")
+          : e.target.value,
     });
   };
 
@@ -113,28 +125,38 @@ function GivePartReject() {
 
   const handleProcess = () => {
     if (rc && rc.no_rc !== "") {
-      const tempDatas = JSON.parse(localStorage.getItem('dataRc'))
-      const newData = tempDatas.map((el) => el["no_rc"] === rc.no_rc ? { ...el, status: "GIVE PART", operatorId: rc.operatorId } : el);
-      localStorage.setItem("dataRc", JSON.stringify(newData))
-      window.location.assign('/monitoring-rs')
+      const tempDatas = JSON.parse(localStorage.getItem("dataRc"));
+      const newData = tempDatas.map((el) =>
+        el["no_rc"] === rc.no_rc
+          ? { ...el, status: "GIVE PART", operatorId: rc.operatorId }
+          : el
+      );
+      localStorage.setItem("dataRc", JSON.stringify(newData));
+      window.location.assign("/monitoring-rs");
     } else {
       Swal.fire({
-        title: 'Warning',
-        icon: 'warning',
-        text: 'silahkan pilih No Rc yang akan di proses',
+        title: "Warning",
+        icon: "warning",
+        text: "silahkan pilih No Rc yang akan di proses",
       });
     }
-  }
+  };
 
   const handleSearch = (e) => {
     e.stopPropagation();
-    setShow(true)
-    if(rc.nomor_surat_jalan && rc.nomor_surat_jalan !== ""){
-      setDatas(datas.filter((el) => el.no_surat_jalan === rc.nomor_surat_jalan))
+    setShow(true);
+    if (rc.nomor_surat_jalan && rc.nomor_surat_jalan !== "") {
+      setDatas(
+        datas.filter((el) => el.no_surat_jalan === rc.nomor_surat_jalan)
+      );
     } else {
-      setDatas(JSON.parse(localStorage.getItem('dataRc')).filter((el) => el.status === 'SUPPLIER' && el.no_surat_jalan !== ""))
+      setDatas(
+        JSON.parse(localStorage.getItem("dataRc")).filter(
+          (el) => el.status === "SUPPLIER" && el.no_surat_jalan !== ""
+        )
+      );
     }
-  }
+  };
 
   return (
     <div>
@@ -153,157 +175,158 @@ function GivePartReject() {
                 Please check quantity before confirm
               </p>
               {/* <form> */}
-                <div class="form-group row">
-                  <label for="inputPassword" class="col-sm-4 col-form-label">
-                    Nomor SJ
-                  </label>
-                  <div class="col-sm-5" >
-                    <Form.Control
-                      type="text"
-                      name="nomor_surat_jalan"
-                      value={rc.nomor_surat_jalan}
-                      placeholder="Scan/Input Nomor SJ"
-                      style={{minHeight: 48}}
-                      onChange={(e) => handleChange(e, "nomor_surat_jalan")}
-                    />
-                  </div>
-                  <div class="col-sm-1">
-                    <button>
-                      <i
-                        className="typcn typcn-camera"
-                        style={{ fontSize: "28px" }}
-                      ></i>{" "}
-                    </button>
-                  </div>
-                  <div class="col-sm-1">
-                    <button onClick={handleSearch}>
-                      <i
-                        className="typcn typcn-zoom-outline"
-                        style={{ fontSize: "28px" }}
-                      ></i>{" "}
-                    </button>
-                  </div>
+              <div class="form-group row">
+                <label for="inputPassword" class="col-sm-4 col-form-label">
+                  Nomor SJ
+                </label>
+                <div class="col-sm-5">
+                  <Form.Control
+                    type="text"
+                    name="nomor_surat_jalan"
+                    value={rc.nomor_surat_jalan}
+                    placeholder="Scan/Input Nomor SJ"
+                    style={{ minHeight: 48 }}
+                    onChange={(e) => handleChange(e, "nomor_surat_jalan")}
+                  />
                 </div>
-                <div class="form-group row">
-                  <label for="inputPassword" class="col-sm-4 col-form-label">
-                    RC No.
-                  </label>
-                  <div class="col-sm-8">
-                    <Form.Control
-                      type="text"
-                      name="no_rc"
-                      value={rc.no_rc}
-                      onChange={(e) => handleChange(e, "no_rc")}
-                      placeholder="Auto Input RC No."
-                      disabled
-                    />
-                  </div>
+                <div
+                  class="col-sm-1"
+                  style={{ display: "flex", justifyContent: "row" }}
+                >
+                  <button onClick={handleSearch} style={{border: '1px solid #cdcdcd', backgroundColor: '#fff'}}>
+                    <i
+                      className="typcn typcn-zoom-outline"
+                      style={{ fontSize: "28px" }}
+                    ></i>{" "}
+                  </button>
+                  <button style={{ marginLeft: 5, border: '1px solid #cdcdcd', backgroundColor: '#fff' }}>
+                    <i
+                      className="typcn typcn-camera"
+                      style={{ fontSize: "28px" }}
+                    ></i>{" "}
+                  </button>
                 </div>
-                <div class="form-group row">
-                  <label for="inputPassword" class="col-sm-4 col-form-label">
-                    Operator ID
-                  </label>
-                  <div class="col-sm-8">
-                    <Form.Control
-                      type="text"
-                      name="operatorId"
-                      value={rc.operatorId}
-                      onChange={(e) => handleChange(e, "operatorId")}
-                      placeholder="Auto Input Operator ID"
-                      disabled
-                    />
-                  </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputPassword" class="col-sm-4 col-form-label">
+                  RC No.
+                </label>
+                <div class="col-sm-8">
+                  <Form.Control
+                    type="text"
+                    name="no_rc"
+                    value={rc.no_rc}
+                    onChange={(e) => handleChange(e, "no_rc")}
+                    placeholder="Auto Input RC No."
+                    disabled
+                  />
                 </div>
-                <div class="form-group row">
-                  <label for="inputPassword" class="col-sm-4 col-form-label">
-                    MRP Controller
-                  </label>
-                  <div class="col-sm-8">
-                    <Form.Control
-                      type="text"
-                      name="mrp_controller"
-                      value={rc.mrp_controller}
-                      onChange={(e) => handleChange(e, "mrp_controller")}
-                      placeholder="Auto Input MRP Controller"
-                      disabled
-                    />
-                  </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputPassword" class="col-sm-4 col-form-label">
+                  Operator ID
+                </label>
+                <div class="col-sm-8">
+                  <Form.Control
+                    type="text"
+                    name="operatorId"
+                    value={rc.operatorId}
+                    onChange={(e) => handleChange(e, "operatorId")}
+                    placeholder="Auto Input Operator ID"
+                    disabled
+                  />
                 </div>
-                <div class="form-group row">
-                  <label for="inputPassword" class="col-sm-4 col-form-label">
-                    Supplier Code
-                  </label>
-                  <div class="col-sm-8">
-                    <Form.Control
-                      type="text"
-                      name="supplier_code"
-                      value={rc.supplier_code}
-                      onChange={(e) => handleChange(e, "supplier_code")}
-                      placeholder="Auto Input Supplier Code"
-                      disabled
-                    />
-                  </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputPassword" class="col-sm-4 col-form-label">
+                  MRP Controller
+                </label>
+                <div class="col-sm-8">
+                  <Form.Control
+                    type="text"
+                    name="mrp_controller"
+                    value={rc.mrp_controller}
+                    onChange={(e) => handleChange(e, "mrp_controller")}
+                    placeholder="Auto Input MRP Controller"
+                    disabled
+                  />
                 </div>
-                <div class="form-group row">
-                  <label for="inputPassword" class="col-sm-4 col-form-label">
-                    Supplier Desc
-                  </label>
-                  <div class="col-sm-8">
-                    <Form.Control
-                      type="text"
-                      name="supplier_desc"
-                      value={rc.supplier_desc}
-                      onChange={(e) => handleChange(e, "supplier_desc")}
-                      placeholder="Auto Input Supplier Desc"
-                      disabled
-                    />
-                  </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputPassword" class="col-sm-4 col-form-label">
+                  Supplier Code
+                </label>
+                <div class="col-sm-8">
+                  <Form.Control
+                    type="text"
+                    name="supplier_code"
+                    value={rc.supplier_code}
+                    onChange={(e) => handleChange(e, "supplier_code")}
+                    placeholder="Auto Input Supplier Code"
+                    disabled
+                  />
                 </div>
-                <div class="form-group row">
-                  <label for="inputPassword" class="col-sm-4 col-form-label">
-                    Part Number
-                  </label>
-                  <div class="col-sm-8">
-                    <Form.Control
-                      type="text"
-                      name="partNumber"
-                      value={rc.partNumber}
-                      onChange={(e) => handleChange(e, "partNumber")}
-                      placeholder="Auto Input Part Number"
-                      disabled
-                    />
-                  </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputPassword" class="col-sm-4 col-form-label">
+                  Supplier Desc
+                </label>
+                <div class="col-sm-8">
+                  <Form.Control
+                    type="text"
+                    name="supplier_desc"
+                    value={rc.supplier_desc}
+                    onChange={(e) => handleChange(e, "supplier_desc")}
+                    placeholder="Auto Input Supplier Desc"
+                    disabled
+                  />
                 </div>
-                <div class="form-group row">
-                  <label for="inputPassword" class="col-sm-4 col-form-label">
-                    Part Desc.
-                  </label>
-                  <div class="col-sm-8">
-                    <Form.Control
-                      type="text"
-                      name="partNumberDesc"
-                      value={rc.partNumberDesc}
-                      onChange={(e) => handleChange(e, "partNumberDesc")}
-                      placeholder="Auto Input Part Desc"
-                      disabled
-                    />
-                  </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputPassword" class="col-sm-4 col-form-label">
+                  Part Number
+                </label>
+                <div class="col-sm-8">
+                  <Form.Control
+                    type="text"
+                    name="partNumber"
+                    value={rc.partNumber}
+                    onChange={(e) => handleChange(e, "partNumber")}
+                    placeholder="Auto Input Part Number"
+                    disabled
+                  />
                 </div>
-                <div class="form-group row">
-                  <label for="inputPassword" class="col-sm-4 col-form-label">
-                    Jumlah
-                  </label>
-                  <div class="col-sm-8">
-                    <Form.Control
-                      type="text"
-                      name="jumlah"
-                      value={rc.jumlah}
-                      onChange={(e) => handleChange(e, "jumlah")}
-                      placeholder="Auto Input Jumlah"
-                      disabled
-                    />
-                  </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputPassword" class="col-sm-4 col-form-label">
+                  Part Desc.
+                </label>
+                <div class="col-sm-8">
+                  <Form.Control
+                    type="text"
+                    name="partNumberDesc"
+                    value={rc.partNumberDesc}
+                    onChange={(e) => handleChange(e, "partNumberDesc")}
+                    placeholder="Auto Input Part Desc"
+                    disabled
+                  />
                 </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputPassword" class="col-sm-4 col-form-label">
+                  Jumlah
+                </label>
+                <div class="col-sm-8">
+                  <Form.Control
+                    type="text"
+                    name="jumlah"
+                    value={rc.jumlah}
+                    onChange={(e) => handleChange(e, "jumlah")}
+                    placeholder="Auto Input Jumlah"
+                    disabled
+                  />
+                </div>
+              </div>
               {/* </form> */}
             </div>
           </div>

@@ -165,18 +165,19 @@ function ReceivePartReplacement() {
                     onChange={(e) => handleChange(e, "nomor_surat_jalan")}
                   />
                 </div>
-                <div class="col-sm-1">
-                  <button>
+                <div
+                  class="col-sm-1"
+                  style={{ display: "flex", justifyContent: "row" }}
+                >
+                  <button onClick={handleSearch} style={{border: '1px solid #cdcdcd', backgroundColor: '#fff'}}>
                     <i
-                      className="typcn typcn-camera"
+                      className="typcn typcn-zoom-outline"
                       style={{ fontSize: "28px" }}
                     ></i>{" "}
                   </button>
-                </div>
-                <div class="col-sm-1">
-                  <button onClick={handleSearch}>
+                  <button style={{ marginLeft: 5, border: '1px solid #cdcdcd', backgroundColor: '#fff' }}>
                     <i
-                      className="typcn typcn-zoom-outline"
+                      className="typcn typcn-camera"
                       style={{ fontSize: "28px" }}
                     ></i>{" "}
                   </button>

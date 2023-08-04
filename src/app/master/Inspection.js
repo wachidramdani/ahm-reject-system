@@ -197,7 +197,7 @@ function Inspection() {
                                             <div className="col-lg-5">
                                                 <span className="font-weight-bold font-italic">Part Number</span>
                                                 <div className="row mg-b-4">
-                                                    <div class="col-sm-8">
+                                                    <div class="col-sm-10">
                                                         <Form.Control
                                                             type="text"
                                                             name="pn"
@@ -207,17 +207,9 @@ function Inspection() {
                                                         />
                                                     </div>
                                                     <div class="col-sm-2">
-                                                        <button>
+                                                        <button style={{border: '1px solid #cdcdcd', backgroundColor: '#fff'}}>
                                                             <i
                                                                 className="typcn typcn-camera"
-                                                                style={{ fontSize: "28px" }}
-                                                            ></i>{" "}
-                                                        </button>
-                                                    </div>
-                                                    <div class="col-sm-1" style={{marginLeft: -20}}>
-                                                        <button>
-                                                            <i
-                                                                className="typcn typcn-zoom-outline"
                                                                 style={{ fontSize: "28px" }}
                                                             ></i>{" "}
                                                         </button>
